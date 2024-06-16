@@ -1,80 +1,89 @@
 const Discord = require("discord.js-selfbot-v13");
 const { Client } = require('discord.js-selfbot-v13');
-const client = new Discord.Client({
-    checkUpdate: false
-});
-const express = require('express')
+const express = require('express');
 const app = express();
 const port = 8000;
 
+const client = new Client({
+    checkUpdate: false
+});
+
 const largeImages = [
-    'https://media.discordapp.net/attachments/1241016552313065563/1242488952196432033/0c753154257af31d1848edba62354a20.gif?ex=664f5702&is=664e0582&hm=f4ddf0504440d194a6492f26ab298d172ed1877dd07c2cd917bf2c9e7698cd99&=&width=550&height=310'
-    // Add more large image URLs as needed
+    'https://i.ibb.co/QXzgDTD/med1.gif',
+    'https://i.ibb.co/R6j0BkW/med2.gif',
+    'https://i.ibb.co/26wMwz4/med3.gif',
+    'https://i.ibb.co/8rSG8ng/med4.gif'
 ];
 
 const stateTexts = [
-    "+:୨彼氏を愛してる୧:﹤"
-    // Add more state texts as needed
+    "꒰ ของดีอยู่ตรงหน้าไอ้ห่าไม่เอา ꒱",
+    "꒰ Join My Discord Fr ꒱"
 ];
 
 const nameTexts = [
-    "+:୨彼氏を愛してる୧:﹤"
-    // Add more state texts as needed
+    "꒰ ของดีอยู่ตรงหน้าไอ้ห่าไม่เอา ꒱",
+    "꒰ Join My Discord Fr ꒱"
 ];
 
-let currentStateIndex = 0; // Index to track the current state text
-
+let currentStateIndex = 0;
 let currentLargeImageIndex = 0;
+let currentNameTextIndex = 0;
 
-let currentnameTextsIndex = 0;
+app.get('/', (req, res) => res.send('Server is running successfully'));
+app.listen(port, () => console.log(`Server is listening at http://localhost:${port}`));
 
-app.get('/', (req, res) => res.send('ทำงานเรียบร้อยแล้ว'))
-app.listen(port, () =>
-    console.log(`Your app is listening at http://localhost:${port}`)
-);
-
-client.on("ready", async () => {
-    var startedAt = Date.now();
-    console.log(`${client.user.username} เม็ดม่วงทำงานเรียบร้อยแล้ว !`);
+client.on("ready", () => {
+    const startedAt = Date.now();
+    console.log(`${client.user.username} bot is running successfully!`);
 
     setInterval(() => {
-        const currentTime = getCurrentTime();
-        const currentDate = getCurrentDate();
+        updateRichPresence(startedAt);
+        rotateIndices();
+    }, 10000);
+});
 
+function updateRichPresence(startedAt) {
+    const currentTime = getCurrentTime();
+    const currentDate = getCurrentDate();
+
+    try {
         const r = new Discord.RichPresence()
             .setApplicationId('1121867777867788309')
             .setType('STREAMING')
-            .setURL('https://www.youtube.com/watch?v=IhJZs4GwKYo')
+            .setURL('https://www.youtube.com/watch?v=uU9Fe-WXew4')
             .setState(stateTexts[currentStateIndex])
-            .setName(nameTexts[currentnameTextsIndex])
-            .setDetails(`·͙⁺˚•̩̩͙✩•̩̩͙˚⁺‧͙⁺˚•̩̩͙✩•̩̩͙˚⁺‧͙`)
+            .setName(nameTexts[currentNameTextIndex])
+            .setDetails('꒰ ᵔ ᵕ ᵔ ꒱')
             .setStartTimestamp(startedAt)
-            .setAssetsLargeText(`┆ ʚ📅 ${currentDate} ♡ ⌚${currentTime}ɞ ┆`)
+            .setAssetsLargeText(`꒰ ʚ📅 ${currentDate} ♡ 🎲${currentTime}ɞ ꒱`)
             .setAssetsLargeImage(largeImages[currentLargeImageIndex])
             .setAssetsSmallText('A$t๏r 🖤')
-            .addButton('Fav Song', ' https://www.youtube.com/watch?v=Ud1NGiI3qvU');
-
+            .addButton('My Discord', 'https://discord.gg/charlisy');
 
         client.user.setActivity(r);
+    } catch (error) {
+        console.error('Failed to update Rich Presence:', error);
+    }
+}
 
-        currentLargeImageIndex = (currentLargeImageIndex + 1) % largeImages.length;
-        currentStateIndex = (currentStateIndex + 1) % stateTexts.length;
-        currentnameTextsIndex = (currentnameTextsIndex + 1) % nameTexts.length;
-    }, 2500); // Change large image and state text every 1 second
-});
+function rotateIndices() {
+    currentLargeImageIndex = (currentLargeImageIndex + 1) % largeImages.length;
+    currentStateIndex = (currentStateIndex + 1) % stateTexts.length;
+    currentNameTextIndex = (currentNameTextIndex + 1) % nameTexts.length;
+}
 
 function getCurrentDate() {
-    const a = new Date(Date.now());
-    const c = { timeZone: "Asia/Bangkok", day: "2-digit", month: "2-digit", year: "numeric" };
-    const formattedDate = a.toLocaleDateString("en-US", c);
+    const date = new Date();
+    const options = { timeZone: "Asia/Bangkok", day: "2-digit", month: "2-digit", year: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
     const [month, day, year] = formattedDate.split('/');
     return `${day}/${month}/${year}`;
 }
 
 function getCurrentTime() {
-    const a = new Date(Date.now());
-    const c = { timeZone: "Asia/Bangkok", hour: "numeric", minute: "numeric", hour12: false };
-    return a.toLocaleTimeString("th-TH", c);
+    const date = new Date();
+    const options = { timeZone: "Asia/Bangkok", hour: "numeric", minute: "numeric", hour12: false };
+    return date.toLocaleTimeString("th-TH", options);
 }
 
-client.login(process.env.token);
+client.login(process.env.TOKEN);
