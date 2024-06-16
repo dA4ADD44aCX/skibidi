@@ -9,7 +9,7 @@ const client = new Client({
 });
 
 const largeImages = [
-    'https://media.discordapp.net/attachments/1248256282817859636/1251724171549872209/med1.gif?ex=666f9e7a&is=666e4cfa&hm=ab1e987cf74740b85c1b57513cca1438dc322d85eefe13fb3462d0409e43ac2e&=&width=622&height=350',
+    'https://media.discordapp.net/attachments/1248256282817859636/1251724171877285898/med2.gif?ex=666f9e7a&is=666e4cfa&hm=7fee4e2d3cb86bc7b2fb1af43685ddf8d2443d50094888b955a954569412acef&=&width=800&height=445',
     'https://media.discordapp.net/attachments/1248256282817859636/1251724171050877008/med4.gif?ex=666f9e7a&is=666e4cfa&hm=99a0a255489957cadcd2ad6dcb9ba5f140993db3873c157783196a158986db46&=&width=622&height=351'
 ];
 
@@ -51,7 +51,7 @@ function updateRichPresence(startedAt) {
             .setURL('https://www.youtube.com/watch?v=uU9Fe-WXew4')
             .setState(stateTexts[currentStateIndex])
             .setName(nameTexts[currentNameTextIndex])
-            .setDetails('꒰ ᵔ ᵕ ᵔ ꒱')
+            .setDetails('꒰⸝⸝⸝⸝> 𝙲𝙷𝙰𝚁𝙻𝙸𝚂𝚈 <⸝⸝⸝⸝꒱')
             .setStartTimestamp(startedAt)
             .setAssetsLargeText(`꒰ ʚ📅 ${currentDate} ♡ 🎲${currentTime}ɞ ꒱`)
             .setAssetsLargeImage(largeImages[currentLargeImageIndex])
