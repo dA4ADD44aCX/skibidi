@@ -9,8 +9,8 @@ const client = new Client({
 });
 
 const largeImages = [
-    'https://media.discordapp.net/attachments/1248256282817859636/1251724171877285898/med2.gif?ex=666f9e7a&is=666e4cfa&hm=7fee4e2d3cb86bc7b2fb1af43685ddf8d2443d50094888b955a954569412acef&=&width=800&height=445',
-    'https://media.discordapp.net/attachments/1248256282817859636/1251724171050877008/med4.gif?ex=666f9e7a&is=666e4cfa&hm=99a0a255489957cadcd2ad6dcb9ba5f140993db3873c157783196a158986db46&=&width=622&height=351'
+    'https://cdn.discordapp.com/banners/877171082799505490/a_986b218f3434e3516b441e1aa7be72de.gif?size=1024',
+    'https://cdn.discordapp.com/banners/877171082799505490/a_8bc92c8ec223e4c96099f534feaa36b5.gif?size=1024'
 ];
 
 const stateTexts = [
