@@ -79,7 +79,6 @@ function rotateIndices() {
     currentLargeImageIndex = (currentLargeImageIndex + 1) % largeImages.length;
     currentStateIndex = (currentStateIndex + 1) % stateTexts.length;
     currentNameTextIndex = (currentNameTextIndex + 1) % nameTexts.length;
-    console.log(`Updated indices - Image: ${currentLargeImageIndex}, State: ${currentStateIndex}, Name: ${currentNameTextIndex}`);
 }
 
 function getCurrentDate() {
